@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ----
 
 
-### 0.0.3 - 2018-08-10 . Initial Release
+### 0.0.1 - 2018-08-10 . Initial Release
 ##### Added
 - Initial version of this SDK .framework
 - Core functionality
@@ -19,5 +19,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ----
 
 ### Unreleased
-##### 0.0.2
-##### 0.0.1
+##### 0.0.1 rc-14 through 0.0.1 rc-20
