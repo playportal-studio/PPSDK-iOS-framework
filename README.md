@@ -100,7 +100,7 @@ The SDK must be configured in conjunction with the playPORTAL, so that your app 
 
 * Edit your AppDelegate.m
 
-	* Include the PlayPortal namespace by adding the following statement at the top of your app.
+	* Include the PlayPortal definitions by adding the following statement at the top of your app.
 	```
 	 #import <PlayPortal/PPManager.h>
 	```
@@ -108,17 +108,17 @@ The SDK must be configured in conjunction with the playPORTAL, so that your app 
 	* Update your myClientID and mySecret string vars with the information from your app definition/configuration in playportal.io.
 		```
 		NSString myClientID = @"<YOUR_CLIENT_ID_HERE>";
-		NSString mySecret = @"<YOUR_CLIENT_SECRET_HERE";
-		NSString myRedirectURI = @"appname/redirect";  
+		NSString mySecret = @"<YOUR_CLIENT_SECRET_HERE>";
+		NSString myRedirectURI = @"yourappname/redirect";  
 		```
 
-	* All playPORTAL SDK services are accessed thru a single or static class method. Initialize the SDK:
+	* All playPORTAL SDK services are accessed either thru a singleton or a static class method.
 		```
 	    [PPManager setPpsdkEnvironment:env];  // where env is one of { "SANDBOX", "PRODUCTION" }
 	    [[PPManager sharedInstance] configure:cid secret:cse andRedirectURI:redirectURI];
 		```
 
-	* Register a method to receive callbacks upon completion of SSO authentication
+	* Register a method to receive the SSO callback from th eplayPORTAL server:
 	```
 	- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 	    [[PPManager sharedInstance] handleOpenURL:url];
@@ -160,8 +160,8 @@ The user listener is invoked by the SDK on changes in the auth status of the app
 
 
 ##### SSO Login
-The SSO login validates a single player (user) against the playPORTAL. Players may log in with a valid playPORTAL set of credentials, or as a guest player.
-This method will initiate the login process. If a player is already logged in, it will reconnect that Player to their playPORTAL account
+The SSO login authenticates a single user with the playPORTAL service. Users may log in with a valid set of playPORTAL credentials, or as a guest.
+This method will initiate the login process. If a user is already logged in, it will reconnect that user to their playPORTAL account
 
     // Instantiate a playPORTAL login button, PPLoginButton. This will cause the SDK to handle the auth flow (on press)
     PPLoginButton *loginButton = [[PPLoginButton alloc] init];
@@ -171,49 +171,23 @@ This method will initiate the login process. If a player is already logged in, i
 
 --
 ##### Data
-The SDK provides a simple Key Value (KV) read/write model. On login, there are two data stores opened / created for this player. There is a private data store for this players exclusive use, and there is a global data store this player shares with all other players of this same app. If a player logs out and logs in at a later date, the data in the private data store should be as left upon logout. The contents of the global data store will most likely have changed.
+The SDK provides a simple JSON Key Value (KV) read/write capability. On login, there are two data stores opened / created for this user. There is a private data store for this user's exclusive use, and there is a global data store this user shares with all other users of this same app. If a user logs out and logs in at a later date, the data in the private data store should be as left upon logout. The contents of the global data store will most likely have changed depending on other app users actions.
+	
+	PPManager *ppm = [PPManager sharedInstance];
+	
+	[ppm.datasvc writeBucket:  andKey:(NSString*)key andValue:[NSString stringWithFormat:@"%ld, value] push:FALSE handler:^(NSError *error) { }
 
-
-	    void writeMyData(string key, string value);
-
-   			string key - a key to associate with this data
+		string bucket - bucket name, where (myAppGlobalDataStorage and myDataStorage are predefined)
+		string key - a key to associate with this data
     		string value - value to store
 
     	This method will write a KV pair to this user's private data store. If a key is used more than once, the value associated with the key will be updated.
 
+---
 
+	    [ppm.PPdatasvc readBucket:bucket andKey:(NSString*)key handler:^(NSDictionary* d, NSError* error) {}
+		string bucket - bucket name, where (myAppGlobalDataStorage and myDataStorage are predefined)
+		string key - a key to associate with this data
+		NSDictionary *d - an NSDictionary is returned
 
-	    void writeGlobalData(string key, string value);
-
-   			string key - a key to associate with this data
-    		string value - value to store
-
-    	This method will write a KV pair to this application's global data store. Again, if a key is used more than once (by any user), the value associated with the key will be updated.
-
---
-
-         public void readMyData(string key, Action<string>callback);
-
-			string key - a key to read from.
-			callback - C# method that takes a string parameter containing the returned value
-
-			The callback method is defined as:
-						
-			private delegate void ReadDataDelegate(string value);
-			[AOT.MonoPInvokeCallback(typeof(ReadDataDelegate))]  
-			protected static void ReadCallback(string value)
-			{
-				// do something with the value
-			}
-
-	public void readMyDataAsDictionary(string key, Action<string>callback);
-		// This returns the KV pair in a JSON string format. The JSON string can be converted to a C# object with:
-	        someObject = (SomeObject)JsonUtility.FromJson(theJsonString, typeof(SomeObject)); 
-		// where SomeObject is defined as appropriate for the data being stored (a simple example is included).
-
-
-	public void readGlobalData(string key, Action<string>callback);
-
-			string key - a key to read from.
-			callback - C# method that takes a string parameter containing the returned value (see previous example for method of defining a callback fnx.)
 
