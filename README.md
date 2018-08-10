@@ -168,12 +168,25 @@ This method will initiate the login process. If a user is already logged in, it 
     loginButton.center = self.view.center;
     [self.view addSubview:loginButton];
 
-On successful SSO authentiation, the user's profile is returned via the userListener() method.
+On successful SSO authentiation, the user's profile is returned via the userListener() method. The user profile (PPUserObject) contains the following fields:
+
+	NSString* userId;
+	NSString* handle;
+	NSString* firstName;
+	NSString* lastName;
+	NSString* country;
+	NSString* accountType;
+	NSString* userType;
+	NSDictionary* parentFlags;
+	NSString* profilePicId;
+	UIImage* profilePic;
+	NSString* coverPhotoId;
+	UIImage* coverPhoto;
 
 --
 
 ##### Friends
-The SDK provides a method to retrieve a user's friends and their profiles.
+The SDK provides a method to retrieve a user's friends and their profiles (which contain the same info as a PPUserObject):
 
 	PPManager *ppm = [PPManager sharedInstance];
 
