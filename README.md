@@ -168,8 +168,31 @@ This method will initiate the login process. If a user is already logged in, it 
     loginButton.center = self.view.center;
     [self.view addSubview:loginButton];
 
+On successful SSO authentiation, the user's profile is returned via the userListener() method.
 
 --
+
+##### Friends
+The SDK provides a method to retrieve a user's friends and their profiles.
+
+	PPManager *ppm = [PPManager sharedInstance];
+
+
+	[ppm.PPusersvc getFriendsProfiles:^(NSError *error) { 
+    		if(error == NULL) {
+			int fc = [ppm.PPfriendsobj getFriendsCount];
+		}
+	}];
+    
+    
+	Individual friends profiles can be viewed by the following method:
+	
+	NSDictionary* d = [ppm.PPfriendsobj getFriendAtIndex:index];  
+
+		where d = NSDictionary containing a friend record
+		      index = int (< friends count) of the friend's record to view;
+
+
 ##### Data
 The SDK provides a simple JSON Key Value (KV) read/write capability. On login, there are two data stores opened / created for this user. There is a private data store for this user's exclusive use, and there is a global data store this user shares with all other users of this same app. If a user logs out and logs in at a later date, the data in the private data store should be as left upon logout. The contents of the global data store will most likely have changed depending on other app users actions.
 	
