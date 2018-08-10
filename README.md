@@ -1,7 +1,7 @@
 ![](./readmeAssets/wordmark.png)
 ##### playPORTAL <sup>TM</sup> provides a service to app developers for managing users of all ages and the data associated with the app and the app users, while providing compliance with required COPPA laws and guidelines.
 
-# <b>Hello World - ObjectiveC</b></br>
+# <b>playPORTAL SDK for iOS apps</b></br>
 
 ## Getting Started
 
