@@ -1,7 +1,6 @@
 ![](./readmeAssets/studio.png)
-##### playPORTAL Studio<sup>TM</sup> provides a service to app developers for managing users of all ages and the data associated with the app and the app users, while providing compliance with required COPPA laws and guidelines.
-
 # <b>playPORTAL SDK for iOS</b></br>
+##### playPORTAL Studio<sup>TM</sup> provides a service to app developers for managing users of all ages and the data associated with the app and the app users, while providing compliance with required COPPA laws and guidelines.
 
 ## Getting Started
 
