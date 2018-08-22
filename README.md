@@ -1,7 +1,7 @@
 ![](./readmeAssets/studio.png)
 ##### playPORTAL Studio<sup>TM</sup> provides a service to app developers for managing users of all ages and the data associated with the app and the app users, while providing compliance with required COPPA laws and guidelines.
 
-# <b>Hello World - ObjectiveC</b></br>
+# <b>playPORTAL SDK for iOS</b></br>
 
 ## Getting Started
 
@@ -33,7 +33,7 @@
 
 	* Tap "Registered Redirect URIs"
 	* Tap "+ Add Redirect URI"
-	* Enter "helloworld://redirect" in to the prompt and click "Submit".
+	* Enter your app's redirect uri (e.g. - helloworld://redirect) in to the prompt and click "Submit".
   </br>
 
 * ### <b>Step 5:</b> Add Client ID and Client Secret to App
