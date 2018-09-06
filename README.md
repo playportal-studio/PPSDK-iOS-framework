@@ -91,7 +91,9 @@
 		- App should build and run on the attached iOS device
      	- Note: If Xcode generates an error regarding Objective-c exceptions; fix error in Xcode by selecting "Project" and search for "exception". Set "Enable Objective-C Exceptions" to "Yes".
 		- Tap "Play" button again
-
+		
+        - Note: If Xcode crashes with a dyld error (unable to load image), see this thread for info on loading playportal.framework into your app.
+	https://stackoverflow.com/questions/24333981/ios-app-with-framework-crashed-on-device-dyld-library-not-loaded-xcode-6-beta#24345546
 -----
 
 ### Utilizing SDK functionality
